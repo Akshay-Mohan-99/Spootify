@@ -5,7 +5,8 @@ import axios from 'axios';
 import {Buffer} from 'buffer';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchToken, getToken} from './Features/Playlist/playlist';
+import {fetchToken, getToken, fetchPlaylists} from './Features/Playlist/playlist';
+
 
 
 import Dashboard from './Components/Dashboard';
@@ -21,13 +22,20 @@ function App() {
   const token = useSelector(getToken);
   const dispatch = useDispatch();
   
-
+  useEffect(() => {
+    
+    dispatch(fetchToken());
+    
+    
+  },[])
+  
   useEffect(() => {
 
-    dispatch(fetchToken());
+    dispatch(fetchPlaylists());
+    
   
-  },[])
-
+  },[token])
+  
   return (
     <div className="App">
       {token ? <Dashboard token={token}/> : <Login/>}

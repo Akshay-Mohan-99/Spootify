@@ -14,6 +14,9 @@ const initialState = {
 const client_id = 'befd02f1951a48ecb1fe6f03f1e72282';
 const client_secret = '153f44c2c6bc43aba817c7724f79dbd5';
 const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
+const playlist_url1 = 'https://api.spotify.com/v1/playlists/2osU806H8zwNHOCvz2yJnD';
+const playlist_url2 = 'https://api.spotify.com/v1/playlists/4ebtZ6LHsyyZh5NaPMG5st';
+const playlist_url3 = 'https://api.spotify.com/v1/playlists/';
 
 export const fetchToken = createAsyncThunk('playlist/fetchToken', ()=> {
 
@@ -32,6 +35,39 @@ export const fetchToken = createAsyncThunk('playlist/fetchToken', ()=> {
     });
   
 })
+
+
+export const fetchPlaylists = createAsyncThunk('playlist/fetchPlaylists', (arg, {getState})=> {
+
+  const token =  getState().playlist.token;
+
+  const promise1 = axios.get(playlist_url1,  {
+      headers: { 
+        'Authorization': `Bearer ${token.access_token}`,
+        'Content-Type': 'application/json' 
+      }
+    });
+  const promise2 = axios.get(playlist_url2,  {
+    headers: { 
+      'Authorization': `Bearer ${token.access_token}`,
+      'Content-Type': 'application/json' 
+    }
+  });
+
+  // const promise3 = axios.get(playlist_url,  {
+  //   headers: { 
+  //     'Authorization': `Bearer ${token.access_token}`,
+  //     'Content-Type': 'application/json' 
+  //   }
+  // });
+
+  return Promise.all([promise1, promise2]).then(values => [values[0].data,values[1].data])
+  .catch(function (error) {
+    console.log(error);
+  });
+
+})
+
 
 export const playlistSlice = createSlice({
   name: 'playlist',
@@ -53,6 +89,9 @@ export const playlistSlice = createSlice({
   extraReducers : builder =>{
     builder.addCase(fetchToken.fulfilled,(state,action) =>{
       state.token = action.payload;
+    })
+    builder.addCase(fetchPlaylists.fulfilled,(state,action) =>{
+      state.playlist = action.payload;
     })
   }
 })
