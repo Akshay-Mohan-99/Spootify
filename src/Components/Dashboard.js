@@ -3,6 +3,7 @@ import React, { useEffect, useState,  Suspense } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 import {ErrorBoundary} from 'react-error-boundary'
+
 import Home from './Home';
 import {
   BrowserRouter,
@@ -21,7 +22,7 @@ export default function Dasboard ({token}) {
     <div className='Dashboard'>
       <div className='upperDash' >
         <div className='sidebar'>
-          <div style={{display:'flex',alignItems:'center'}}><FontAwesomeIcon style={{fontSize: '40px'}} icon={faSpotify} /> <div style={{paddingLeft:'5px'}}>Spotify</div></div>
+          <div style={{display:'flex',alignItems:'center'}}><FontAwesomeIcon style={{fontSize: '40px'}} icon={faSpotify} /> <div onClick={} style={{paddingLeft:'5px'}}>Spotify</div></div>
         </div>
           <BrowserRouter>
             <Routes>
@@ -30,9 +31,9 @@ export default function Dasboard ({token}) {
             </Routes>
           </BrowserRouter>
       </div>
-      {/* <div className='bottombar'>
+      <div >
           <Player token={token ? token.access_token : null}/>
-      </div> */}
+      </div>
     </div>
   )
 }
