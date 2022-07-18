@@ -32,7 +32,7 @@ export default function Home({token}) {
 
   return (
     <div className='mainContent'>
-      <h3>My Spotify Collection</h3>
+      <h3 style={{margin:'23px'}}>My Spotify Collection</h3>
       {playlist1 && 
       <MusicComponent id={playlist1.id} handleClick={handleClick} name={playlist1.name} description={playlist1.description} pic={playlist1.images[0].url}/>
       }

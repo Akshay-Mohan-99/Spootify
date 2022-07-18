@@ -16,13 +16,13 @@ import Player from './Player';
 
 export default function Dasboard ({token}) {
   
-
+  
 
   return (
     <div className='Dashboard'>
       <div className='upperDash' >
         <div className='sidebar'>
-          <div style={{display:'flex',alignItems:'center'}}><FontAwesomeIcon style={{fontSize: '40px'}} icon={faSpotify} /> <div onClick={} style={{paddingLeft:'5px'}}>Spotify</div></div>
+          <div style={{display:'flex',alignItems:'center'}}><FontAwesomeIcon style={{fontSize: '40px'}} icon={faSpotify} /> <div onClick={() => {window.location = '/'}} style={{paddingLeft:'5px'}}>Spotify</div></div>
         </div>
           <BrowserRouter>
             <Routes>
